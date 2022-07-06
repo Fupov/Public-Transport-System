@@ -1,5 +1,5 @@
-# Public-Transport-System
-> Une simulation de système de transport public.
+# Public-Transport-Simulator
+> Public transport simulator
 ## Requirement
 
 Pour linux et Mac OS : 
