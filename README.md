@@ -23,10 +23,6 @@ Now suppose that 3 taxis are at the disposal of the passengers to take them to t
 
 This transport system is simulated by a main process and a taxis process (child process of the main process). The main process communicates with the taxis process through a named pipe. Figure 2 shows the conceptual diagram of the system.
 
-![alt text](https://ekhtar.000webhostapp.com/figure1.JPG "Figure 1")
-
-Figure1 –Example of a circuit with 5 bus stations and 3 metro stations. The bus constantly circles the circuit in the same direction. While the metro goes back and forth on the same metro line.
-
 #### Main process
 
 The main process consists of three threads: metro, bus, and checker. The bus travels clockwise (indicated by an arrow in Figure 1). Each bus station has a queue of passengers associated with it. The metro provides transport for passengers between stations 5, 6 and 7. Metro users can wait in the same station but for a different direction. To do this, each metro station has two queues (one queue for each direction). All station queues are FIFO type queues. Passengers are represented by a structure containing the following information:
@@ -36,10 +32,6 @@ The main process consists of three threads: metro, bus, and checker. The bus tra
 — Elapsed waiting time
 — A transfer between the metro and bus circuit is required (boolean value)
 — Maximum waiting time
-
-![alt text](https://ekhtar.000webhostapp.com/figure2.JPG "Figure 2")
-Figure2 – Conceptual diagram of the public transport system.
-
 
 Passengers are read from a text file. The main process receives the file name from the command line, creates the passengers and inserts them into the correct queue. In the text file, the first line sets the number of passengers while a line preceded by a '##' identifies a passenger. On the same line, the order of the information read corresponds to the order of the variables in the passenger data structure. For example, the line `”## 21 3 6 0 1 8”` identifies passenger 21 who has been at station 3 (since 0 units of time) and wants to go to station 6. His maximum waiting time is 8 units of time. After reading and distributing the passengers to the station queues, the main process creates, in order, the named communication pipe, the taxis process and the threads.
 #### Les threads autobus et métro
